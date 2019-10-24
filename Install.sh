@@ -9,8 +9,8 @@ oc new-project pipeline \
 oc project pipeline
 
 
-oc new-app sonarqube
-oc expose svc/sonarqube
+oc new-app -f sonar/sonarqube-postgresql-template.yaml --param=SONARQUBE_VERSION=7.0
+
 
 
 
@@ -25,9 +25,6 @@ oc new-app -f selenium/selenium-node-firefox.yaml
 oc new-app  wildfly~https://github.com/openshiftdemos/os-sample-java-web.git    --name=testing-pipeline
 oc expose svc/testing-pipeline
 
-
-#oc new-app jenkins
-#oc expose svc/jenkins
 
 
 
