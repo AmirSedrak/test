@@ -14,10 +14,10 @@ oc new-app -f sonar/sonarqube-postgresql-template.yaml --param=SONARQUBE_VERSION
 
 
 
-oc create -f selenium/selenium-hub.yaml
+oc new-app -f selenium/selenium-hub.yaml
 
-oc create -f selenium/selenium-node-chrome.yaml
-oc create -f selenium/selenium-node-firefox.yaml
+oc new-app -f selenium/selenium-node-chrome.yaml
+oc new-app -f selenium/selenium-node-firefox.yaml
 
 
 
