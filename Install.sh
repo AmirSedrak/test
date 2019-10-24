@@ -35,5 +35,6 @@ oc new-app -e \
     POSTGRESQL_USER=admin,POSTGRESQL_PASSWORD=admin,POSTGRESQL_DATABASE=database1 \
     registry.access.redhat.com/rhscl/postgresql-94-rhel7
 
+oc expose svc/postgresql-94-rhel7
 
 
