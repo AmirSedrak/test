@@ -5,10 +5,10 @@ metadata:
     pipeline.alpha.openshift.io/uses: '[{"name": "jenkins", "namespace": "", "kind": "DeploymentConfig"}]'
   creationTimestamp: '2019-10-23T19:52:49Z'
   labels:
-    app: test-pipeline
-    group: test-pipeline
-    name: test-pipeline
-  name: test-pipeline
+    app: ci/cd-pipeline
+    group: ci/cd-pipeline
+    name: ci/cd-pipeline
+  name: ci/cd-pipeline
   namespace: autodeploy-test
   resourceVersion: '2817394'
   selfLink: >-
