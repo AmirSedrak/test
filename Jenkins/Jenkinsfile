@@ -40,7 +40,7 @@ pipeline {
     stage('Build on Test') {
       steps {
         script{
-            openshiftDeploy apiURL: '', authToken: '', depCfg: 'testing-pipeline', namespace: 'autodeploy-test', verbose: 'false', waitTime: '', waitUnit: 'sec'
+            openshiftDeploy apiURL: '', authToken: '', depCfg: 'testing-pipeline', namespace: 'Pipeline', verbose: 'false', waitTime: '', waitUnit: 'sec'
         }
       }
     }
@@ -48,7 +48,7 @@ pipeline {
     stage('Deploy to Test') {
       steps {
         script{
-            openshiftDeploy apiURL: '', authToken: '', depCfg: 'testing-pipeline', namespace: 'autodeploy-test', verbose: 'false', waitTime: '', waitUnit: 'sec'
+            openshiftDeploy apiURL: '', authToken: '', depCfg: 'testing-pipeline', namespace: 'Pipeline', verbose: 'false', waitTime: '', waitUnit: 'sec'
         }
       }
     }  
