@@ -1,9 +1,9 @@
 oc login -u admin -p openshift-demo
 
 
-oc new-project Pipeline \
+oc new-project pipeline \
             --description="This is an example project to demonstrate OpenShift CI/CD automation" \
-                --display-name="CI/CD Test "
+                --display-name="CI/CD Pipeline "
 
 
 oc project Pipeline
