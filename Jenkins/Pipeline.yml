@@ -5,11 +5,11 @@ metadata:
     pipeline.alpha.openshift.io/uses: '[{"name": "jenkins", "namespace": "", "kind": "DeploymentConfig"}]'
   creationTimestamp: '2019-10-23T19:52:49Z'
   labels:
-    app: pipeline
-    group: pipeline
-    name: pipeline
-  name: pipeline
-  namespace: pipeline
+    app: test-pipeline
+    group: test-pipeline
+    name: test-pipeline
+  name: test-pipeline
+  namespace: autodeploy-test
   resourceVersion: '2817394'
   selfLink: >-
     /apis/build.openshift.io/v1/namespaces/autodeploy-test/buildconfigs/test-pipeline
@@ -91,10 +91,10 @@ spec:
   successfulBuildsHistoryLimit: 5
   triggers:
     - github:
-        secret: ""
+        secret: XjOjfeCL
       type: GitHub
     - generic:
-        secret: ""
+        secret: XjOjfeCL
       type: Generic
 status:
   lastVersion: 186
