@@ -10,7 +10,7 @@ oc project pipeline
 
 
 oc new-app sonarqube
-
+oc expose svc/sonarqube
 
 
 
