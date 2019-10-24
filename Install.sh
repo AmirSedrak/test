@@ -38,5 +38,5 @@ oc new-app -e \
 oc expose svc/postgresql
 
 
-oc new-app Jenkins/Jenkinsfile --strategy=pipeline
+oc create -f Jenkins/Pipeline.yml
 
