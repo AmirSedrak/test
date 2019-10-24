@@ -91,10 +91,10 @@ spec:
   successfulBuildsHistoryLimit: 5
   triggers:
     - github:
-        secret: 
+        secret: ""
       type: GitHub
     - generic:
-        secret: 
+        secret: ""
       type: Generic
 status:
   lastVersion: 186
