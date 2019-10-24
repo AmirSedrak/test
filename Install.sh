@@ -33,7 +33,7 @@ oc expose svc/jenkins
 
 oc new-app -e \
     POSTGRESQL_USER=admin,POSTGRESQL_PASSWORD=admin,POSTGRESQL_DATABASE=database1 \
-    postgresql --name=postgresql
+     --template=openshift/postgresql-persistent --name=postgresql
 
 oc expose svc/postgresql
 
