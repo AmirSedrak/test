@@ -9,7 +9,7 @@ oc new-project pipeline \
 oc project pipeline
 
 
-oc new-app -f sonar/sonarqube-postgresql-template.yaml --param=SONARQUBE_VERSION=6.7
+oc new-app sonarqube
 
 
 
