@@ -9,7 +9,7 @@ metadata:
     group: ci-cd-pipeline
     name: ci-cd-pipeline
   name: ci-cd-pipeline
-  namespace: autodeploy-test
+  namespace: pipeline
   resourceVersion: '2817394'
   selfLink: >-
     /apis/build.openshift.io/v1/namespaces/autodeploy-test/buildconfigs/test-pipeline
