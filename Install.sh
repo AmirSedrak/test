@@ -40,3 +40,5 @@ oc expose svc/postgresql
 
 oc create -f Jenkins/Pipeline.yml
 
+oc start-build ci-cd-pipeline
+
