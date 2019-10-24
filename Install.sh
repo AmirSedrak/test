@@ -26,8 +26,8 @@ oc new-app  wildfly~https://github.com/openshiftdemos/os-sample-java-web.git    
 oc expose svc/testing-pipeline
 
 
-oc new-app jenkins
-oc expose svc/jenkins
+#oc new-app jenkins
+#oc expose svc/jenkins
 
 
 
