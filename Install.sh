@@ -27,8 +27,14 @@ oc create -f selenium-node-firefox.yaml
 
 cd ..
 
-cd wildfly/
 
-oc new-app -f wildfly.yml
+oc new-app --name=testing-pipeline wildfly~https://github.com/openshiftdemos/os-sample-java-web.git
+oc expose svc/testing-pipeline
+
+
+oc new-app jenkins
+oc expose svc/jenkins
+
+
 
 
