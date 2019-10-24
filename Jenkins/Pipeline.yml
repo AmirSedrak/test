@@ -63,7 +63,7 @@ spec:
                     -Dsonar.projectKey='java-backend' \
                     -Dsonar.projectName='java-backend' \
                     -Dsonar.sources=. \
-                    -Dsonar.host.url='http://sonarqube.autodeploy-test.svc:9000' \
+                    -Dsonar.host.url='http://sonarqube.pipeline.svc:9000' \
                     -Dsonar.login='admin' \
                     -Dsonar.password='admin'"
                 }
