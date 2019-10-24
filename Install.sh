@@ -6,7 +6,7 @@ oc new-project pipeline \
                 --display-name="CI/CD Pipeline "
 
 
-oc project Pipeline
+oc project pipeline
 
 
 oc new-app -f sonar/sonarqube-postgresql-template.yaml --param=SONARQUBE_VERSION=6.7
