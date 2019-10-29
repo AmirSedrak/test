@@ -4,26 +4,34 @@
   hosts: nodes
   pre_tasks: 
     
-    - name: "install python2"
-      raw: "sudo yum install -y python"
+    - name: "Install python2"
+      yum: 
+        name: python
+        state: latest
     
-    - name: "install NetworkManager"
-      raw: "sudo yum install -y NetworkManager"
+    - name: "Install NetworkManager"
+      yum: 
+        name: NetworkManager
+        state: latest
+    
   
   tasks: 
     
-    - name: "install the latest version of Apache"
+    - name: "Install Docker"
       retries: 3
       yum: 
         name: docker
         state: latest
 
-    - name: "enable network-manager"
-      shell: "sudo systemctl enable NetworkManager && sudo systemctl start NetworkManager"
+    - name: "Enable NetworkManager"
+      service:
+        name: NetworkManager
+        state: started
    
-    - name: "enable docker"
-      retries: 3
-      shell: "sudo systemctl enable docker && sudo systemctl start docker"
+    - name: "Enable docker"
+      service:
+        name: docker
+        state: started
    
     - name: "Add repository"
       yum_repository: 
