@@ -1,24 +1,15 @@
 
 
 
-oc login 
-
-
 
 oc new-project myproject  --description="This is an example project to demonstrate KAFKA on OpenShift " --display-name="KAFKA"
 
 
 
 
-oc apply -f https://github.com/strimzi/strimzi-kafka-operator/releases/download/0.14.0/strimzi-cluster-operator-0.14.0.yaml -n myproject
+oc apply -f strimzi-cluster-operator.yaml -n myproject
 
-
-
-
-
-
-
-
+oc apply -f kafka.yml -n myproject
 
 
 
