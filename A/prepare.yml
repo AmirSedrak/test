@@ -2,22 +2,20 @@
 - 
   gather_facts: false
   hosts: nodes
-  pre_tasks: 
+  become: yes
+  tasks: 
     
-    - name: "Install python2"
+    - name: "Installing Python"
       yum: 
         name: python
         state: latest
     
-    - name: "Install NetworkManager"
+    - name: "Installing NetworkManager"
       yum: 
         name: NetworkManager
         state: latest
-    
-  
-  tasks: 
-    
-    - name: "Install Docker"
+
+    - name: "Installing Docker"
       retries: 3
       yum: 
         name: docker
