@@ -1,6 +1,6 @@
 
 
-## How to Install
+## How to Run
 
 Once the cluster is running, you can run a simple producer to send messages to Kafka topic (the topic will be automatically created):
 
