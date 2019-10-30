@@ -1,0 +1,27 @@
+
+
+
+oc login 
+
+
+
+oc new-project myproject  --description="This is an example project to demonstrate KAFKA on OpenShift " --display-name="KAFKA"
+
+
+
+
+oc apply -f https://github.com/strimzi/strimzi-kafka-operator/releases/download/0.14.0/strimzi-cluster-operator-0.14.0.yaml -n myproject
+
+
+
+
+
+
+
+
+
+
+
+oc -n myproject run kafka-producer -ti --image=strimzi/kafka:0.14.0-kafka-2.3.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list my-cluster-kafka-bootstrap:9092 --topic my-topic
+
+
