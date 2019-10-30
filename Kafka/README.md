@@ -1,4 +1,11 @@
+## How to Install
 
+```elm
+git clone https://github.com/AmirSedrak/test.git
+cd test/Kafka/
+sudo chmod +x KafkaInstall.sh
+sudo ./KafkaInstall.sh
+```
 
 ## How to Run
 
