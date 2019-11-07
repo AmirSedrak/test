@@ -25,9 +25,7 @@ oc new-app -f selenium/selenium-node-firefox.yaml
 oc new-app  wildfly~https://github.com/openshiftdemos/os-sample-java-web.git    --name=testing-pipeline
 oc expose svc/testing-pipeline
 
-oc new-app jboss/keycloak
 
-oc expose svc/keycloak
 
 
 oc new-app -e \
