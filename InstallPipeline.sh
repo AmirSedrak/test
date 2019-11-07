@@ -41,6 +41,9 @@ oc new-app -e OPENSHIFT_ENABLE_OAUTH=true -e VOLUME_CAPACITY=10Gi jenkins-persis
 
 oc new-app docker.bintray.io/jfrog/artifactory-oss:latest
 
+oc expose svc/artifactory-oss
+
+
 oc create -f Jenkins/BuildConfigHook.yaml
 
 
