@@ -37,9 +37,13 @@ oc expose svc/postgresql
 oc new-app -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password jboss/keycloak
 oc expose svc/keycloak
 
+oc new-app -e OPENSHIFT_ENABLE_OAUTH=true -e VOLUME_CAPACITY=10Gi jenkins-persistent
+
+oc new-app docker.bintray.io/jfrog/artifactory-oss:latest
+
+oc create -f Jenkins/BuildConfigHook.yaml
 
 
-oc create -f Jenkins/Pipeline.yml
+#oc create -f Jenkins/Pipeline.yml
 
-oc start-build ci-cd-pipeline
-
+#oc start-build ci-cd-pipeline
