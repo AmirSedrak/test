@@ -34,6 +34,10 @@ oc new-app -e \
 
 oc expose svc/postgresql
 
+oc new-app -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password jboss/keycloak
+oc expose svc/keycloak
+
+
 
 oc create -f Jenkins/Pipeline.yml
 
