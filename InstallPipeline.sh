@@ -46,6 +46,10 @@ oc expose svc/artifactory-oss
 
 oc create -f Jenkins/BuildConfigHook.yaml
 
+oc create tomcat --name=tomcat
+
+oc expose svc/tomcat
+
 
 #oc create -f Jenkins/Pipeline.yml
 
