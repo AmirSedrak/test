@@ -1,4 +1,4 @@
-oc login -u admin -p openshift-demo
+oc login -u admin -p admin
 
 
 oc new-project pipeline \
