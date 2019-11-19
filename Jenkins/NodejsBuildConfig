@@ -1,0 +1,21 @@
+kind: Template
+apiVersion: v1
+labels:
+  app: nodejs-cicd
+metadata:
+  name: nodejs-ci-cd-template
+objects:
+  - kind: BuildConfig
+    apiVersion: v1
+    labels:
+      app: java-cicd
+    metadata:
+      name: sample-java-cicd-build
+    spec:
+      source:
+        git:
+          uri: https://github.com/AmirSedrak/test.git
+      strategy:
+        type: JenkinsPipeline
+        jenkinsPipelineStrategy:
+          jenkinsFilePath: Jenkins/Jenkinsfile
