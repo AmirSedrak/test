@@ -1,0 +1,86 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    pipeline.alpha.openshift.io/uses: '[{"name": "jenkins", "namespace": "", "kind": "DeploymentConfig"}]'
+  creationTimestamp: '2019-10-23T19:52:49Z'
+  labels:
+    app: ci-cd-nodejs-pipeline
+    group: ci-cd-nodejs-pipeline
+    name: ci-cd-nodejs-pipeline
+  name: ci-cd-nodejs-pipeline
+  namespace: pipeline
+  resourceVersion: '2817394'
+  selfLink: >-
+    /apis/build.openshift.io/v1/namespaces/autodeploy-test/buildconfigs/test-pipeline
+  uid: b13be1e7-f5ce-11e9-be83-023215868cf2
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: {}
+  output: {}
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    type: None
+  strategy:
+    jenkinsPipelineStrategy:
+      env:
+        - name: DEV_PROJECT
+          value: dev
+        - name: STAGE_PROJECT
+          value: stage
+      jenkinsfile: |-
+       
+        pipeline {
+          agent any
+          stages {
+            stage('Pull App') {
+              steps {
+                git branch: 'master', url: 'https://github.com/openshift/nodejs-ex.git' 
+              }
+            }
+          
+          
+             stage('Code Analysis') {
+              steps {
+                script {
+                  sh "${mvnCmd} sonar:sonar  \
+                    -Dsonar.projectKey='javascript-backend' \
+                    -Dsonar.projectName='javascript-backend' \
+                    -Dsonar.sources=. \
+                    -Dsonar.host.url='http://sonarqube.pipeline.svc:9000' \
+                    -Dsonar.login='admin' \
+                    -Dsonar.password='admin'"
+                }
+              }
+            }
+            
+            stage('Build on Test') {
+              steps {
+                script{
+                    openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs', namespace: 'pipeline', verbose: 'false', waitTime: '', waitUnit: 'sec'
+                }
+              }
+            }
+            
+            stage('Deploy to Test') {
+              steps {
+                script{
+                    openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs', namespace: 'pipeline', verbose: 'false', waitTime: '', waitUnit: 'sec'
+                }
+              }
+            }  
+          }
+        }
+    type: JenkinsPipeline
+  successfulBuildsHistoryLimit: 5
+  triggers:
+    - github:
+        secret: XjOjfeCL
+      type: GitHub
+    - generic:
+        secret: XjOjfeCL
+      type: Generic
+status:
+  lastVersion: 0
