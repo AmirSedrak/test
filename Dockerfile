@@ -22,6 +22,8 @@ RUN apt-get update && \
         && apt-get clean
 
 
+USER jenkins
+
 
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false" \
         JENKINS_URL=https://jenkins-pipeline.apps.bnpdev.com\
