@@ -4,6 +4,7 @@ pipeline {
       node {
         label 'maven'
       }   
+  }
   stages {
     stage('Pull App') {
       steps {
