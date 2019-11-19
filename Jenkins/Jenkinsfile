@@ -1,4 +1,4 @@
-def mvnCmd = "mvn"
+
 pipeline {
   agent any
   stages {
