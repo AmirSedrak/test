@@ -1,0 +1,12 @@
+credentials
+matrix-auth
+sonar
+delivery-pipeline-plugin
+git
+junit
+maven-plugin
+nodejs
+performance
+dependency-check-jenkins-plugin
+workflow-aggregator
+pipeline-maven
