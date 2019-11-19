@@ -46,9 +46,13 @@ oc expose svc/artifactory-oss
 
 oc create -f Jenkins/BuildConfigHook.yaml
 
-oc create tomcat --name=tomcat
+oc new-app tomcat --name=tomcat
 
 oc expose svc/tomcat
+
+oc new-app nodejs~https://github.com/openshift/nodejs-ex.git --name=nodejs
+
+oc expose svc/nodejs
 
 
 #oc create -f Jenkins/Pipeline.yml
