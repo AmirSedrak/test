@@ -1,10 +1,10 @@
-
+def mvnCmd = "mvn"
 pipeline {
   agent any
   stages {
     stage('Pull App') {
       steps {
-        git branch: 'master', url: 'https://github.com/openshift/nodejs-ex.git' 
+        git branch: 'master', url: 'https://github.com/AmirSedrak/apps.git' 
       }
     }
   
