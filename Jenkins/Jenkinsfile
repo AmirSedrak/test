@@ -1,10 +1,6 @@
-def mvnCmd = "mvn"
+
 pipeline {
-  agent {
-      node {
-        label 'maven'
-      }   
-  }
+  agent any
   stages {
     stage('Pull App') {
       steps {
@@ -16,7 +12,7 @@ pipeline {
      stage('Code Analysis') {
       steps {
         script {
-          sh "${mvnCmd} sonar:sonar  \
+          sh "sonar:sonar  \
             -Dsonar.projectKey='javascript-backend' \
             -Dsonar.projectName='javascript-backend' \
             -Dsonar.sources=. \
