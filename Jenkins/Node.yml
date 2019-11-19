@@ -4,8 +4,9 @@ metadata:
   name: "ci-cd-node-pipeline"
 spec:
   source:
+    contextDir: Jenkins
     git: 
       uri: "https://github.com/AmirSedrak/test"
   strategy:
-    jenkinsPipelineStrategy
+    jenkinsPipelineStrategy:
       jenkinsFilePath: Jenkins/Jenkinsfile
