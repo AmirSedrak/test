@@ -1,14 +1,34 @@
 
 pipeline {
   agent any
+  
+  node {
+    env.NODEJS_HOME = "${tool 'Node 13.1'}"
+    // on linux / mac
+    env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
+    sh 'npm --version'
+}
+  
+  
   stages {
     stage('Pull App') {
       steps {
-        git branch: 'master', url: 'https://github.com/AmirSedrak/apps.git' 
+        git branch: 'master', url: 'https://github.com/AmirSedrak/frontend.git' 
       }
     }
   
+    
+      stage('build frontend') {
+      steps {
+        script {
+          sh "npm install"
+        }
+      }  
+    }
   
+    
+    
+    
      stage('Code Analysis') {
       steps {
         script {
