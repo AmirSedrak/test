@@ -1,10 +1,10 @@
 
 pipeline {
-  agent any
-  
-
-  
-  
+  agent {
+              node {
+                  label 'nodex'
+              }
+            } 
   stages {
     stage('Pull App') {
       steps {
@@ -13,14 +13,19 @@ pipeline {
     }
   
     
-      stage('build frontend') {
+      stage('Install dependencies') {
       steps {
           steps {
-                    sh 'npm config ls'
+                    sh 'npm install'
                 }
       }  
     }
-  
+    
+      stage('Build Application') {
+                    steps {
+                        sh "npm run ng build"
+                    }
+                }
     
     
     
