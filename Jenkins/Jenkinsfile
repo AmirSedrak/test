@@ -2,12 +2,7 @@
 pipeline {
   agent any
   
-  node {
-    env.NODEJS_HOME = "${tool 'Node 13.1'}"
-    // on linux / mac
-    env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
-    sh 'npm --version'
-}
+
   
   
   stages {
@@ -20,9 +15,9 @@ pipeline {
     
       stage('build frontend') {
       steps {
-        script {
-          sh "npm install"
-        }
+          nodejs(nodeJSInstallationName: 'Node 13.1') {
+                    sh 'npm config ls'
+                }
       }  
     }
   
