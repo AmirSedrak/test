@@ -1,5 +1,4 @@
-FROM jenkins/jenkins:lts
-
+FROM quay.io/openshift/origin-jenkins:v4.0
 
 
 MAINTAINER Amir Sedrak, Amir.Sedrak@ibm.com
@@ -20,13 +19,7 @@ RUN apt-get update && \
         postgresql \
         && apt-get clean
 
-USER jenkins
 
-ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false" \
-        JENKINS_URL=http://localhost\
-        JENKINS_USER=admin \
-        JENKINS_PASS=admin 
+COPY plugins.txt /opt/openshift/configuration
 
-COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-
-RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+RUN /usr/local/bin/install-plugins.sh /opt/openshift/configuration/plugins.txt
