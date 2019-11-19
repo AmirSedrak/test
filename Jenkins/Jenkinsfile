@@ -15,7 +15,7 @@ pipeline {
     
       stage('build frontend') {
       steps {
-          nodejs(nodeJSInstallationName: 'Node 13.1',  configId: 'MyNpmrcConfig') {
+          nodejs(nodeJSInstallationName: 'Node',  configId: 'MyNpmrcConfig') {
                     sh 'npm config ls'
                 }
       }  
