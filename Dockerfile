@@ -1,4 +1,4 @@
-FROM quay.io/openshift/origin-jenkins:v4.0
+FROM jenkins/jenkins:lts
 
 
 
@@ -30,6 +30,7 @@ ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false" \
         JENKINS_USER=admin \
         JENKINS_PASS=admin 
 
-COPY plugins.txt /opt/openshift/configuration
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 
-RUN /usr/local/bin/install-plugins.sh < /opt/openshift/configuration/plugins.txt
+
+RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
