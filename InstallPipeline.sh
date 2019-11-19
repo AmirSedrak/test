@@ -48,7 +48,13 @@ oc expose svc/artifactory-oss
 
 oc create -f Jenkins/BuildConfigHook.yaml
 
+
+oc start-build ci-cd-java-pipeline
+
+
 oc create -f Jenkins/Node.yml
+
+oc start-build ci-cd-node-pipeline
 
 oc new-app tomcat 
 
