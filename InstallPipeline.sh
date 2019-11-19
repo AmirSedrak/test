@@ -50,7 +50,7 @@ oc create -f Jenkins/BuildConfigHook.yaml
 
 oc create -f Jenkins/Node.yml
 
-oc new-app tomcat --name=tomcat
+oc new-app tomcat 
 
 oc expose svc/tomcat
 
