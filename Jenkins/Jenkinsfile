@@ -1,34 +1,20 @@
 def mvnCmd = "mvn"
-
 pipeline {
-  agent {
-      node {
-        label 'maven'
-      }    
-    }
+  agent any
   stages {
     stage('Pull App') {
       steps {
-        git branch: 'master', url: 'https://github.com/javaparser/javaparser-maven-sample.git' 
+        git branch: 'master', url: 'https://github.com/openshift/nodejs-ex.git' 
       }
     }
   
-       stage('build maven') {
-      steps {
-        script {
-          sh "${mvnCmd} clean install"
-        }
-      }  
-    }
-
-    
   
      stage('Code Analysis') {
       steps {
         script {
           sh "${mvnCmd} sonar:sonar  \
-            -Dsonar.projectKey='java-backend' \
-            -Dsonar.projectName='java-backend' \
+            -Dsonar.projectKey='javascript-backend' \
+            -Dsonar.projectName='javascript-backend' \
             -Dsonar.sources=. \
             -Dsonar.host.url='http://sonarqube.pipeline.svc:9000' \
             -Dsonar.login='admin' \
