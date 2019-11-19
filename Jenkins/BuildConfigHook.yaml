@@ -1,7 +1,7 @@
 kind: "BuildConfig"
 apiVersion: "v1"
 metadata:
-  name: "ci-cd-node-pipeline"
+  name: "ci-cd-java-pipeline"
 spec:
   source:
     git: 
