@@ -22,4 +22,4 @@ RUN apt-get update && \
 
 COPY plugins.txt /opt/openshift/configuration
 
-RUN /usr/local/bin/install-plugins.sh /opt/openshift/configuration/plugins.txt
+RUN /usr/local/bin/install-plugins.sh < /opt/openshift/configuration/plugins.txt
