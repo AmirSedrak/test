@@ -50,7 +50,7 @@ pipeline {
     stage('Build on WildFly') {
       steps {
         script{
-            openshiftDeploy apiURL: '', authToken: '', depCfg: 'testing-pipeline', namespace: 'pipeline', verbose: 'false', waitTime: '', waitUnit: 'sec'
+            openshiftDeploy apiURL: '', authToken: '', depCfg: 'wildfly', namespace: 'pipeline', verbose: 'false', waitTime: '', waitUnit: 'sec'
         }
       }
     }
@@ -58,7 +58,7 @@ pipeline {
     stage('Deploy to WildFly') {
       steps {
         script{
-            openshiftDeploy apiURL: '', authToken: '', depCfg: 'testing-pipeline', namespace: 'pipeline', verbose: 'false', waitTime: '', waitUnit: 'sec'
+            openshiftDeploy apiURL: '', authToken: '', depCfg: 'wildfly', namespace: 'pipeline', verbose: 'false', waitTime: '', waitUnit: 'sec'
         }
       }
     }  
