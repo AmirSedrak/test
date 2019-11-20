@@ -29,19 +29,7 @@ pipeline {
     
     
     
-     stage('Code Analysis') {
-      steps {
-        script {
-          sh "sonar:sonar  \
-            -Dsonar.projectKey='javascript-backend' \
-            -Dsonar.projectName='javascript-backend' \
-            -Dsonar.sources=. \
-            -Dsonar.host.url='http://sonarqube.pipeline.svc:9000' \
-            -Dsonar.login='admin' \
-            -Dsonar.password='admin'"
-        }
-      }
-    }
+
     
     stage('Build on Test') {
       steps {
