@@ -14,84 +14,58 @@ spec:
   strategy:
     jenkinsPipelineStrategy:
       jenkinsfile: |-
-        pipeline {
-          agent {
-              node {
-                  label 'nodex'
-              }
-            } 
-            stages {
-                stage('Pull App') {
-                    steps {
-                        git branch: 'master', url: 'https://github.com/RyanESmith/better-frontend.git'
-                    }
-                }
-                stage('Install dependencies') {
-                    steps {
-                        sh "npm install"
-                    }
-                }
-                
-                stage('Build') {
-                    steps {
-                        sh "npm run ng build"
-                    }
-                }
-                
-                stage('Code Analysis') {
-                    steps {
-                        sh "sonar-scanner \
-                            -Dsonar.projectKey='nodejs2' \
-                            -Dsonar.projectName='Angular Frontend' \
-                            -Dsonar.sources=src \
-                            -Dsonar.host.url='http://sonarqube.pipeline.svc:9000' \
-                            -Dsonar.login='admin' \
-                            -Dsonar.password='admin'"
-                            
-                    }
-                }
-                
-                stage('Build on Dev') {
-                  steps {
-                    script{
-                        openshiftBuild apiURL: '', authToken: '', bldCfg: 'nodejs2', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'art', showBuildLogs: 'true', verbose: 'true', waitTime: '', waitUnit: 'sec'
-                    }
-                  }
-                }
-                
-                stage('Deploy to Dev') {
-                  steps {
-                    script{
-                        openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs2', namespace: 'art', verbose: 'false', waitTime: '', waitUnit: 'sec'
-                    }
-                  }
-                }
-                
-                stage('Promote to STAGE?') {
-                  steps {
-                    timeout(time:30, unit:'MINUTES') {
-                        input message: "Promote to STAGE?", ok: "Promote"
-                    }
-                  }
-                }
-                
-                stage('Build on Stage') {
-                  steps {
-                    script{
-                        openshiftBuild apiURL: '', authToken: '', bldCfg: 'nodejs2', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'art', showBuildLogs: 'false', verbose: 'false', waitTime: '', waitUnit: 'sec'
-                    }
-                  }
-                }
-                
-                stage('Deploy to Stage') {
-                  steps {
-                    script{
-                        openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs2', namespace: 'art', verbose: 'false', waitTime: '', waitUnit: 'sec'
-                    }
-                  }
-                }
+       pipeline {
+  agent {
+      node {
+          label 'nodex'
+      }
+    } 
+    stages {
+        stage('Pull App') {
+            steps {
+                git branch: 'master', url: 'https://github.com/RyanESmith/better-frontend.git'
             }
-          }     
+        }
+        
+        
+        stage('Install dependencies') {
+            steps {
+                sh "npm install"
+            }
+        }
+        
+        
+        stage('Build') {
+            steps {
+                sh "npm run build"
+            }
+        }
+        
+
+        
+        stage('Build on Dev') {
+          steps {
+            script{
+                openshiftBuild apiURL: '', authToken: '', bldCfg: 'nodejs', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'ryan2', showBuildLogs: 'true', verbose: 'true', waitTime: '', waitUnit: 'sec'
+            }
+          }
+        }
+        
+        stage('Deploy to Dev') {
+          steps {
+            script{
+                openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs', namespace: 'ryan2', verbose: 'false', waitTime: '', waitUnit: 'sec'
+            }
+          }
+        }
+        
+        
+        
+        
+        
+        
+    }
+  }  
     type: JenkinsPipeline
 ---
 kind: ConfigMap
