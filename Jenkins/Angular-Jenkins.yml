@@ -23,7 +23,7 @@ spec:
             stages {
                 stage('Pull App') {
                     steps {
-                        git branch: 'master', url: 'https://github.com/AmirSedrak/frontend.git'
+                        git branch: 'master', url: 'https://github.com/RyanESmith/frontend.git'
                     }
                 }
                 stage('Install dependencies') {
@@ -54,7 +54,7 @@ spec:
                 stage('Build on Dev') {
                   steps {
                     script{
-                        openshiftBuild apiURL: '', authToken: '', bldCfg: 'nodejs2', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'dev', showBuildLogs: 'true', verbose: 'true', waitTime: '', waitUnit: 'sec'
+                        openshiftBuild apiURL: '', authToken: '', bldCfg: 'nodejs2', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'art', showBuildLogs: 'true', verbose: 'true', waitTime: '', waitUnit: 'sec'
                     }
                   }
                 }
@@ -62,7 +62,7 @@ spec:
                 stage('Deploy to Dev') {
                   steps {
                     script{
-                        openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs2', namespace: 'dev', verbose: 'false', waitTime: '', waitUnit: 'sec'
+                        openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs2', namespace: 'art', verbose: 'false', waitTime: '', waitUnit: 'sec'
                     }
                   }
                 }
@@ -162,7 +162,7 @@ metadata:
         - -c
         - |           
           # create frontend application
-          oc new-app --name=nodejs nodejs~https://github.com/AmirSedrak/frontend.git
+          oc new-app --name=nodejs nodejs~https://github.com/RyanESmith/frontend.git
           oc expose dc/nodejs 
           oc create route edge --service=nodejs 
           oc rollout cancel dc/nodejs 
