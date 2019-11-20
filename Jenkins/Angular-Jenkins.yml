@@ -78,7 +78,7 @@ spec:
                 stage('Build on Stage') {
                   steps {
                     script{
-                        openshiftBuild apiURL: '', authToken: '', bldCfg: 'nodejs2', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'stage', showBuildLogs: 'false', verbose: 'false', waitTime: '', waitUnit: 'sec'
+                        openshiftBuild apiURL: '', authToken: '', bldCfg: 'nodejs2', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'art', showBuildLogs: 'false', verbose: 'false', waitTime: '', waitUnit: 'sec'
                     }
                   }
                 }
@@ -86,7 +86,7 @@ spec:
                 stage('Deploy to Stage') {
                   steps {
                     script{
-                        openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs2', namespace: 'stage', verbose: 'false', waitTime: '', waitUnit: 'sec'
+                        openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs2', namespace: 'art', verbose: 'false', waitTime: '', waitUnit: 'sec'
                     }
                   }
                 }
