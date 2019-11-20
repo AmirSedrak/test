@@ -14,58 +14,58 @@ spec:
   strategy:
     jenkinsPipelineStrategy:
       jenkinsfile: |-
-       pipeline {
-  agent {
-      node {
-          label 'nodex'
-      }
-    } 
-    stages {
-        stage('Pull App') {
-            steps {
-                git branch: 'master', url: 'https://github.com/RyanESmith/better-frontend.git'
-            }
-        }
-        
-        
-        stage('Install dependencies') {
-            steps {
-                sh "npm install"
-            }
-        }
-        
-        
-        stage('Build') {
-            steps {
-                sh "npm run build"
-            }
-        }
-        
+        pipeline {
+          agent {
+              node {
+                  label 'nodex'
+              }
+            } 
+            stages {
+                stage('Pull App') {
+                    steps {
+                        git branch: 'master', url: 'https://github.com/RyanESmith/better-frontend.git'
+                    }
+                }
+                
+                
+                stage('Install dependencies') {
+                    steps {
+                        sh "npm install"
+                    }
+                }
+                
+                
+                stage('Build') {
+                    steps {
+                        sh "npm run build"
+                    }
+                }
+                
 
-        
-        stage('Build on Dev') {
-          steps {
-            script{
-                openshiftBuild apiURL: '', authToken: '', bldCfg: 'nodejs', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'ryan2', showBuildLogs: 'true', verbose: 'true', waitTime: '', waitUnit: 'sec'
+                
+                stage('Build on Dev') {
+                  steps {
+                    script{
+                        openshiftBuild apiURL: '', authToken: '', bldCfg: 'nodejs', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'ryan2', showBuildLogs: 'true', verbose: 'true', waitTime: '', waitUnit: 'sec'
+                    }
+                  }
+                }
+                
+                stage('Deploy to Dev') {
+                  steps {
+                    script{
+                        openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs', namespace: 'ryan2', verbose: 'false', waitTime: '', waitUnit: 'sec'
+                    }
+                  }
+                }
+                
+                
+                
+                
+                
+                
             }
-          }
-        }
-        
-        stage('Deploy to Dev') {
-          steps {
-            script{
-                openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs', namespace: 'ryan2', verbose: 'false', waitTime: '', waitUnit: 'sec'
-            }
-          }
-        }
-        
-        
-        
-        
-        
-        
-    }
-  }  
+          }  
     type: JenkinsPipeline
 ---
 kind: ConfigMap
