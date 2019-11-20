@@ -16,7 +16,7 @@ pipeline {
     
       stage('Build Application') {
                     steps {
-                        sh "npm run ng build"
+                        sh "ng build"
                     }
                 }
     
