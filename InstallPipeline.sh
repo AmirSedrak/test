@@ -55,9 +55,8 @@ oc create -f Jenkins/BuildConfigHook.yaml
 oc start-build ci-cd-java-pipeline
 
 
-oc create -f Jenkins/Node.yml
+oc create -f Jenkins/Angular-Jenkins.yml
 
-oc start-build ci-cd-node-pipeline
 
 oc new-app tomcat 
 
