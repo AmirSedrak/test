@@ -47,7 +47,7 @@ pipeline {
       }
     }
     
-    stage('Build on Test') {
+    stage('Build on WildFly') {
       steps {
         script{
             openshiftDeploy apiURL: '', authToken: '', depCfg: 'testing-pipeline', namespace: 'pipeline', verbose: 'false', waitTime: '', waitUnit: 'sec'
@@ -55,12 +55,17 @@ pipeline {
       }
     }
     
-    stage('Deploy to Test') {
+    stage('Deploy to WildFly') {
       steps {
         script{
             openshiftDeploy apiURL: '', authToken: '', depCfg: 'testing-pipeline', namespace: 'pipeline', verbose: 'false', waitTime: '', waitUnit: 'sec'
         }
       }
     }  
+    
+    
+
+    
+    
   }
 }
