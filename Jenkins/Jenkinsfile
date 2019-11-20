@@ -17,9 +17,7 @@ pipeline {
       stage('Build Application') {
                     steps {
                         sh "yum install nodejs"
-                        sh "npm install -g @angular/cli"
-                        sh "npm install npm@latest -g"
-                        sh "ng build"
+                        
                     }
                 }
     
