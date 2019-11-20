@@ -23,7 +23,7 @@ spec:
             stages {
                 stage('Pull App') {
                     steps {
-                        git branch: 'master', url: 'https://github.com/RyanESmith/frontend.git'
+                        git branch: 'master', url: 'https://github.com/RyanESmith/better-frontend.git'
                     }
                 }
                 stage('Install dependencies') {
@@ -162,7 +162,7 @@ metadata:
         - -c
         - |           
           # create frontend application
-          oc new-app --name=nodejs nodejs~https://github.com/RyanESmith/frontend.git
+          oc new-app --name=nodejs nodejs~https://github.com/RyanESmith/better-frontend.git
           oc expose dc/nodejs 
           oc create route edge --service=nodejs 
           oc rollout cancel dc/nodejs 
