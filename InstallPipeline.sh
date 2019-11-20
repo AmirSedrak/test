@@ -24,8 +24,8 @@ oc new-app -f selenium/selenium-node-firefox.yaml
 
  
 
-oc new-app  wildfly~https://github.com/openshiftdemos/os-sample-java-web.git    --name=testing-pipeline
-oc expose svc/testing-pipeline
+oc new-app  wildfly~https://github.com/openshiftdemos/os-sample-java-web.git    --name=wildfly
+oc expose svc/wildfly
 
 
 
@@ -36,12 +36,16 @@ oc new-app -e \
 
 oc expose svc/postgresql
 
+
+
+
 oc new-app -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password jboss/keycloak
 oc expose svc/keycloak
 
+
+
 oc new-app -e OPENSHIFT_ENABLE_OAUTH=true -e VOLUME_CAPACITY=10Gi jenkins-persistent
 
-#oc new-app --strategy=docker . --name=jenkins
 
 
 oc new-app docker.bintray.io/jfrog/artifactory-oss:latest
