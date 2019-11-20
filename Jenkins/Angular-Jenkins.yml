@@ -1,0 +1,174 @@
+kind: BuildConfig
+apiVersion: v1
+metadata:
+  annotations:
+    pipeline.alpha.openshift.io/uses: '[{"name": "jenkins", "namespace": "", "kind": "DeploymentConfig"}]'
+  labels:
+    app: cicd-pipeline
+    name: cicd-pipeline
+  name: nodejs2
+spec:
+  runPolicy: Serial
+  source:
+    type: None
+  strategy:
+    jenkinsPipelineStrategy:
+      jenkinsfile: |-
+        pipeline {
+          agent {
+              node {
+                  label 'nodex'
+              }
+            } 
+            stages {
+                stage('Pull App') {
+                    steps {
+                        git branch: 'master', url: 'https://github.com/AmirSedrak/frontend.git'
+                    }
+                }
+                stage('Install dependencies') {
+                    steps {
+                        sh "npm install"
+                    }
+                }
+                
+                stage('Build') {
+                    steps {
+                        sh "npm run ng build"
+                    }
+                }
+                
+                stage('Code Analysis') {
+                    steps {
+                        sh "sonar-scanner \
+                            -Dsonar.projectKey='nodejs2' \
+                            -Dsonar.projectName='Angular Frontend' \
+                            -Dsonar.sources=src \
+                            -Dsonar.host.url='http://sonarqube.pipeline.svc:9000' \
+                            -Dsonar.login='admin' \
+                            -Dsonar.password='admin'"
+                            
+                    }
+                }
+                
+                stage('Build on Dev') {
+                  steps {
+                    script{
+                        openshiftBuild apiURL: '', authToken: '', bldCfg: 'nodejs2', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'dev', showBuildLogs: 'true', verbose: 'true', waitTime: '', waitUnit: 'sec'
+                    }
+                  }
+                }
+                
+                stage('Deploy to Dev') {
+                  steps {
+                    script{
+                        openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs2', namespace: 'dev', verbose: 'false', waitTime: '', waitUnit: 'sec'
+                    }
+                  }
+                }
+                
+                stage('Promote to STAGE?') {
+                  steps {
+                    timeout(time:30, unit:'MINUTES') {
+                        input message: "Promote to STAGE?", ok: "Promote"
+                    }
+                  }
+                }
+                
+                stage('Build on Stage') {
+                  steps {
+                    script{
+                        openshiftBuild apiURL: '', authToken: '', bldCfg: 'nodejs2', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'stage', showBuildLogs: 'false', verbose: 'false', waitTime: '', waitUnit: 'sec'
+                    }
+                  }
+                }
+                
+                stage('Deploy to Stage') {
+                  steps {
+                    script{
+                        openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs2', namespace: 'stage', verbose: 'false', waitTime: '', waitUnit: 'sec'
+                    }
+                  }
+                }
+            }
+          }     
+    type: JenkinsPipeline
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  labels:
+    app: cicd-pipeline
+    role: jenkins-slave
+  name: jenkins-slaves
+data:
+  nodex-template: |-
+    <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
+      <inheritFrom></inheritFrom>
+      <name>nodex</name>
+      <privileged>false</privileged>
+      <alwaysPullImage>false</alwaysPullImage>
+      <instanceCap>2147483647</instanceCap>
+      <idleMinutes>0</idleMinutes>
+      <label>nodex</label>
+      <serviceAccount>jenkins</serviceAccount>
+      <nodeSelector></nodeSelector>
+      <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+      <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
+        <memory>false</memory>
+      </workspaceVolume>
+      <volumes />
+      <containers>
+        <org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate>
+          <name>jnlp</name>
+          <image>docker.io/bavibm/jenkins-agent-node-10</image>
+          <privileged>false</privileged>
+          <alwaysPullImage>true</alwaysPullImage>
+          <workingDir>/tmp</workingDir>
+          <command></command>
+          <args>${computer.jnlpmac} ${computer.name}</args>
+          <ttyEnabled>false</ttyEnabled>
+          <resourceRequestCpu>200m</resourceRequestCpu>
+          <resourceRequestMemory>512Mi</resourceRequestMemory>
+          <resourceLimitCpu>2</resourceLimitCpu>
+          <resourceLimitMemory>4Gi</resourceLimitMemory>
+          <envVars/>
+        </org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate>
+      </containers>
+      <envVars/>
+      <annotations/>
+      <imagePullSecrets/>
+    </org.csanchez.jenkins.plugins.kubernetes.PodTemplate> 
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cicd-demo-installer
+  spec:
+  activeDeadlineSeconds: 400
+  completions: 1
+  parallelism: 1
+  template:
+    spec:
+      containers:    
+      - env:
+        - name: CICD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        command:
+        - /bin/bash
+        - -x
+        - -c
+        - |           
+          # create frontend application
+          oc new-app --name=nodejs nodejs~https://github.com/AmirSedrak/frontend.git
+          oc expose dc/nodejs 
+          oc create route edge --service=nodejs 
+          oc rollout cancel dc/nodejs 
+        image: quay.io/openshift/origin-cli:v4.0
+        name: frontend-openshift-job
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      restartPolicy: Never
