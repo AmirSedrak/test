@@ -5,7 +5,7 @@ def mvnCmd = "mvn"
 pipeline {
     agent {
       node {
-        label 'master'
+        label 'maven'
       }    
     }
 
