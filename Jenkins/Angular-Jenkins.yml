@@ -48,7 +48,7 @@ spec:
                         -Dsonar.projectKey='nodejs' \
                         -Dsonar.projectName='nodejs' \
                         -Dsonar.sources=. \
-                        -Dsonar.host.url='http://sonarqube.pipeline2.svc:9000' \
+                        -Dsonar.host.url='http://sonarqube.nodepipeline.svc:9000' \
                         -Dsonar.login='admin' \
                         -Dsonar.password='admin'"
                     }
@@ -64,7 +64,7 @@ spec:
                 stage('Build on Dev') {
                   steps {
                     script{
-                        openshiftBuild apiURL: '', authToken: '', bldCfg: 'nodejs', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'pipeline2', showBuildLogs: 'true', verbose: 'true', waitTime: '', waitUnit: 'sec'
+                        openshiftBuild apiURL: '', authToken: '', bldCfg: 'nodejs', buildName: '', checkForTriggeredDeployments: 'false', commitID: '', namespace: 'nodepipeline', showBuildLogs: 'true', verbose: 'true', waitTime: '', waitUnit: 'sec'
                     }
                   }
                 }
@@ -72,7 +72,7 @@ spec:
                 stage('Deploy to Dev') {
                   steps {
                     script{
-                        openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs', namespace: 'pipeline2', verbose: 'false', waitTime: '', waitUnit: 'sec'
+                        openshiftDeploy apiURL: '', authToken: '', depCfg: 'nodejs', namespace: 'nodepipeline', verbose: 'false', waitTime: '', waitUnit: 'sec'
                     }
                   }
                 }
