@@ -44,18 +44,7 @@ pipeline {
         
         
         
-        
-       stage ('Build & Upload Artifact') {
-            steps {
-                
-                // run Maven Build and upload the built artifact to Artifactory
-                rtMavenRun (
-                    pom: 'maven-example/multi2/pom.xml',
-                    goals: 'clean install',
-                )
-            }
-        }
-        
+          
         
         
         stage ('Publish build info') {
