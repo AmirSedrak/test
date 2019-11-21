@@ -9,7 +9,8 @@ oc project javapipeline
 
 oc new-app -f sonar/sonarqube-postgresql-template.yaml --param=SONARQUBE_VERSION=7.0
 
-
+oc new-app -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password jboss/keycloak
+oc expose svc/keycloak
 
 
 oc new-app -f selenium/selenium-hub.yaml
