@@ -44,7 +44,7 @@ oc expose svc/keycloak
 
 
 
-oc new-app -e OPENSHIFT_ENABLE_OAUTH=true -e VOLUME_CAPACITY=10Gi jenkins-persistent
+#oc new-app -e OPENSHIFT_ENABLE_OAUTH=true -e VOLUME_CAPACITY=10Gi jenkins-persistent
 
 
 
@@ -53,14 +53,12 @@ oc new-app docker.bintray.io/jfrog/artifactory-oss:latest
 oc expose svc/artifactory-oss
 
 
-oc create -f Jenkins/BuildConfigHook.yaml
 
 
-oc start-build ci-cd-java-pipeline
 
 
 oc create -f Jenkins/Angular-Jenkins.yml
-oc create -f Jenkins/Artifactory/ArtifactoryBC.yaml
+#oc create -f Jenkins/Artifactory/ArtifactoryBC.yaml
 
 oc new-app tomcat 
 
@@ -70,6 +68,11 @@ oc new-app nodejs~https://github.com/openshift/nodejs-ex.git --name=nodejs
 
 oc expose svc/nodejs
 
+
+oc create -f Jenkins/BuildConfigHook.yaml
+
+
+oc start-build ci-cd-java-pipeline
 
 #oc create -f Jenkins/Pipeline.yml
 
