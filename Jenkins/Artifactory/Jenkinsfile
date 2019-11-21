@@ -6,6 +6,8 @@ pipeline {
     agent {
       node {
         label 'master'
+          
+          JENKINS_URL='https://jenkins-persistent-pipeline2.apps.bnpdev.com/'
       }    
     }
 
