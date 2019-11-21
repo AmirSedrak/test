@@ -23,7 +23,7 @@ spec:
             stages {
                 stage('Pull App') {
                     steps {
-                        git branch: 'master', url: 'https://github.com/openshift/nodejs-ex.git'
+                        git branch: 'master', url: 'https://github.com/RyanESmith/better-frontend.git'
                     }
                 }
                 
