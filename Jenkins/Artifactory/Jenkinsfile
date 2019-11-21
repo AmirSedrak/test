@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     // Global tools to be used
-    tools {
-        maven 'maven3.6' 
-        jdk 'jdk8' 
-    }
+ //   tools {
+ //       maven 'maven3.6' 
+ //       jdk 'jdk8' 
+//    }
 
     stages {
         stage('Pull App') {
