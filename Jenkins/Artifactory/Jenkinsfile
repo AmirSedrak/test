@@ -22,6 +22,25 @@ pipeline {
           }
         }
                
+         
+         
+         
+         stage ('Artifactory configuration') {
+            steps {
+            
+                // Set up the Artifactory server
+                rtServer (
+                    id: 'ARTIFACTORY_SERVER',
+                    url: 'http://artifactory-oss-test-project.apps.bnpdev.com/artifactory',
+                    username: 'admin',
+                    password: 'password'
+                )
+            }
+        }
+         
+         
+         
+         
         stage ('Artifactory configuration') {
             steps {
         script {
