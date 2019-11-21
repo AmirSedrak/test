@@ -1,6 +1,6 @@
 oc new-project nodepipeline \
             --description="This is an example project to demonstrate OpenShift CI/CD automation" \
-                --display-name="CI/CD Pipeline "
+                --display-name="CI/CD Node Pipeline "
 
 
 oc project nodepipeline
