@@ -25,7 +25,7 @@ pipeline {
          
          
          
-         stage ('Artifactory configuration') {
+         stage ('Artifactory setup') {
             steps {
             
                 // Set up the Artifactory server
