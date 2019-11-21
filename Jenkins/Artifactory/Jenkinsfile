@@ -1,5 +1,14 @@
+def mvnCmd = "mvn"
+
+
+
 pipeline {
-    agent any
+    agent {
+      node {
+        label 'maven'
+      }    
+    }
+
 
     // Global tools to be used
  //   tools {
@@ -27,16 +36,28 @@ pipeline {
             }
         }
 
-        stage ('Build & Upload Artifact') {
-            steps {
+     //   stage ('Build & Upload Artifact') {
+      //      steps {
                 
                 // run Maven Build and upload the built artifact to Artifactory
-                rtMavenRun (
-                    pom: 'maven-example/multi2/pom.xml',
-                    goals: 'clean install',
-                )
-            }
+        //        rtMavenRun (
+          //          pom: 'maven-example/multi2/pom.xml',
+          //          goals: 'clean install',
+        //        )
+      //      }
+      //  }
+        
+        
+        
+        
+        
+         stage('Build Maven') {
+      steps {
+        script {
+          sh "${mvnCmd} maven-example/multi2/pom.xml clean install"
         }
+      }  
+    }
 
         stage ('Publish build info') {
             steps {
