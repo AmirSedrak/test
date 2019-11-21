@@ -60,7 +60,7 @@ oc start-build ci-cd-java-pipeline
 
 
 oc create -f Jenkins/Angular-Jenkins.yml
-
+oc create -f Jenkins/Artifactory/ArtifactoryBC.yaml
 
 oc new-app tomcat 
 
