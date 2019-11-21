@@ -32,7 +32,7 @@ pipeline {
             -Dsonar.projectKey='java-backend' \
             -Dsonar.projectName='java-backend' \
             -Dsonar.sources=. \
-            -Dsonar.host.url='http://sonarqube.pipeline2.svc:9000' \
+            -Dsonar.host.url='http://sonarqube.javapipeline.svc:9000' \
             -Dsonar.login='admin' \
             -Dsonar.password='admin'"
         }
@@ -42,7 +42,7 @@ pipeline {
     stage('Build on WildFly') {
       steps {
         script{
-            openshiftDeploy apiURL: '', authToken: '', depCfg: 'wildfly', namespace: 'pipeline2', verbose: 'false', waitTime: '', waitUnit: 'sec'
+            openshiftDeploy apiURL: '', authToken: '', depCfg: 'wildfly', namespace: 'javapipeline', verbose: 'false', waitTime: '', waitUnit: 'sec'
         }
       }
     }
@@ -50,7 +50,7 @@ pipeline {
     stage('Deploy to WildFly') {
       steps {
         script{
-            openshiftDeploy apiURL: '', authToken: '', depCfg: 'wildfly', namespace: 'pipeline2', verbose: 'false', waitTime: '', waitUnit: 'sec'
+            openshiftDeploy apiURL: '', authToken: '', depCfg: 'wildfly', namespace: 'javapipeline', verbose: 'false', waitTime: '', waitUnit: 'sec'
         }
       }
     }  
