@@ -2,7 +2,7 @@
 kind: "BuildConfig"
 apiVersion: "v1"
 metadata:
-  name: "Artifactory"
+  name: "artifactory"
 spec:
   source:
     contextDir: Jenkins/Artifactory/
