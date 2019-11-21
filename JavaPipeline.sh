@@ -39,7 +39,9 @@ oc new-app jenkins-persistent \
   -p JENKINS_IMAGE_STREAM_TAG=jenkins:latest \
   -p JENKINS_SERVICE_NAME=jenkins-persistent \
   -p JNLP_SERVICE_NAME=jenkins-persistent-jnlp \
-  -p VOLUME_CAPACITY=10Gi
+  -p VOLUME_CAPACITY=10Gi \
+  -p MEMORY_LIMIT=5120Mi 
+  
   
   
 oc new-app docker.bintray.io/jfrog/artifactory-oss:latest
