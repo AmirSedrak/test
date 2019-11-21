@@ -3,12 +3,12 @@
 oc login -u admin -p admin
 
 
-oc new-project pipeline \
+oc new-project pipeline2 \
             --description="This is an example project to demonstrate OpenShift CI/CD automation" \
                 --display-name="CI/CD Pipeline "
 
 
-oc project pipeline
+oc project pipeline2
 
 
 oc new-app -f sonar/sonarqube-postgresql-template.yaml --param=SONARQUBE_VERSION=7.0
