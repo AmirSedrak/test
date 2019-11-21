@@ -21,15 +21,7 @@ pipeline {
       }  
     }
     
-    
-      stage('checking node version') {
-      steps {
-        script {
-          sh "node --version"
-        }
-      }  
-    }
-
+ 
 
     
   
