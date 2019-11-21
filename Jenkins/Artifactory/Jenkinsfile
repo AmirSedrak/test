@@ -3,7 +3,11 @@ def mvnCmd = "mvn"
 
 
 pipeline {
-     agent any
+     agent {
+      node {
+        label 'maven'
+      }    
+    }
 
     // Global tools to be used
  //   tools {
