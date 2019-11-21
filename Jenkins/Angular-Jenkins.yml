@@ -44,7 +44,7 @@ spec:
             stage('Code Analysis') {
                   steps {
                     script {
-                      sh "sonar:sonar  \
+                      sh "sonar-scanner  \
                         -Dsonar.projectKey='nodejs' \
                         -Dsonar.projectName='nodejs' \
                         -Dsonar.sources=. \
