@@ -18,9 +18,9 @@ oc new-app -f selenium/selenium-node-firefox.yaml
 
 
 
-oc new-app -e \
-    POSTGRESQL_USER=admin,POSTGRESQL_PASSWORD=admin,POSTGRESQL_DATABASE=database1 \
-     --template=openshift/postgresql-persistent --name=postgresql
+//oc new-app -e \
+//    POSTGRESQL_USER=admin,POSTGRESQL_PASSWORD=admin,POSTGRESQL_DATABASE=database1 \
+ //    --template=openshift/postgresql-persistent --name=postgresql
 
 oc expose svc/postgresql
 
