@@ -31,7 +31,7 @@ pipeline {
                 // Set up the Artifactory server
                 rtServer (
                     id: 'ARTIFACTORY_SERVER',
-                    url: 'http://artifactory-oss-pipeline2.apps.bnpdev.com/artifactory',
+                    url: 'http://artifactory-oss-test.apps.bnpdev.com/artifactory',
                     username: 'admin',
                     password: 'password'
                 )
