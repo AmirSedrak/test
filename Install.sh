@@ -72,7 +72,11 @@ oc expose svc/nodejs
 oc create -f Jenkins/BuildConfigHook.yaml
 
 
-#oc start-build ci-cd-java-pipeline
+
+oc start-build ci-cd-java-pipeline
+
+oc start-build ci-cd-nodejs-pipeline 
+
 
 #oc create -f Jenkins/Pipeline.yml
 
