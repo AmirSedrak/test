@@ -3,8 +3,11 @@ def mvnCmd = "mvn"
 
 
 pipeline {
-    agent any
-
+     agent {
+      node {
+        label 'maven'
+      }    
+    }
 
     // Global tools to be used
  //   tools {
@@ -15,21 +18,16 @@ pipeline {
     stages {
         stage('Pull App') {
           steps {
-            git branch: 'master', url: "https://github.com/jfrog/project-examples.git"
+            git branch: 'master', url: "https://github.com/javaparser/javaparser-maven-sample.git"
           }
         }
                
         stage ('Artifactory configuration') {
             steps {
-            
-                // Set up the Artifactory server
-                rtServer (
-                    id: 'ARTIFACTORY_SERVER',
-                    url: 'http://artifactory-oss-pipeline2.apps.bnpdev.com/artifactory',
-                    username: 'admin',
-                    password: 'password'
-                )
-            }
+        script {
+          sh "${mvnCmd} clean install"
+                }
+             }  
         }
 
      //   stage ('Build & Upload Artifact') {
