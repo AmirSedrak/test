@@ -6,7 +6,7 @@ metadata:
   labels:
     app: cicd-pipeline
     name: cicd-pipeline
-  name: nodejs-pipeline
+  name: ci-cd-nodejs-pipeline
 spec:
   runPolicy: Serial
   source:
