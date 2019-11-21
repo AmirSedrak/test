@@ -56,5 +56,5 @@ oc create -f Jenkins/BuildConfigHook.yaml
 oc create -f Jenkins/Artifactory/ArtifactoryBC.yaml
 
 
-oc start-build ci-cd-java-pipeline
-oc start-build artifactory
+# oc start-build ci-cd-java-pipeline
+# oc start-build artifactory
